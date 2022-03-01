@@ -1,26 +1,19 @@
-<?php 
-if ($_SERVER["REQUEST_METHOD"] == "POST"){
-  $contact = [
-    "nom" => $_POST["name"],
-    "num" => $_POST["num"],
-  ];
- 
-  // Comprobem si existeix el JSON
+<?php
+  
+  // Importem el fitxer database.php i en conseqüencia les seves variables
+  require "database.php";
 
-  if (file_exists("contacts.json")) {
-    $contacts = json_decode(file_get_contents("contacts.json"), true);
-  } else {
-    $contacts = [];
-  }
-
-  //  Afegim info dins el Array
-  $contacts[] = $contact;
-
-  // Insertem dins el arxiu json
-  file_put_contents("contacts.json", json_encode($contacts));
-
-  // Enviem al index.php
-  header("Location: index.php");
+  // Si rebem un per les capçaleres un metode POST entrara dins del POST
+  if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    //Variables que rebem per POST
+    $nom = $_POST["name"];
+    $num_phone = $_POST["num"];
+    // Preparem una syntaxis SQL per insertar les dades que s'han passat per el POST
+    $statement = $conn->prepare("INSERT INTO contacts (name, num_phone) VALUES ('$nom', '$num_phone')");
+    // Executem la syntaxis anteriorment preparada
+    $statement->execute();
+    // Enviem al index.php
+    header("Location: index.php");
 }
 
 ?>
@@ -105,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     
                 <div class="mb-3 row">
                   <div class="col-md-6 offset-md-4">
-                    <button type="submit" class="btn btn-primary" name="post_add">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                   </div>
                 </div>
               </form>

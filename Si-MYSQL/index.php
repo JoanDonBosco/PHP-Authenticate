@@ -1,11 +1,8 @@
 <?php 
-
-if (file_exists("contacts.json")) {
-  $contactes = json_decode(file_get_contents("contacts.json"), true);
-} else {
-  $contactes = [];
-}
-
+  // Importem el fitxer database.php i en conseqüencia les seves variables
+  require "database.php";
+  // Donem els valors de la query a la variable $contactes
+  $contactes = $conn->query("SELECT * FROM contacts");
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +30,7 @@ if (file_exists("contacts.json")) {
   <!-- Static Content -->
   <link rel="stylesheet" href="./static/css/index.css" />
 
-  <title>TODO App</title>
+  <title>Contacts App</title>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -65,8 +62,8 @@ if (file_exists("contacts.json")) {
   <main>
     <div class="container pt-4 p-3">
       <div class="row">
-      
-      <?php if (count($contactes) == 0): ?>
+      <!-- Utilitzem un if per saber si existeixent contactes en el cas que no mostratem una nota per que vagi a crear un al arxiu add.php  -->
+      <?php if ($contactes->rowCount() == 0): ?>
         <div class="col-md-4 mx-auto">
           <div class="card card-body text-center">
             <p>No contacts saved yet</p>
@@ -79,8 +76,8 @@ if (file_exists("contacts.json")) {
           <div class="col-md-4 mb-3">
             <div class="card text-center">
               <div class="card-body">
-                <h3 class="card-title text-capitalize"><?= $contact["nom"] ?></h3>
-                <p class="m-2"><?= $contact["num"] ?></p>
+                <h3 class="card-title text-capitalize"><?= $contact["name"] ?></h3>
+                <p class="m-2"><?= $contact["num_phone"] ?></p>
                 <a href="#" class="btn btn-secondary mb-2">Edit Contact</a>
                 <a href="#" class="btn btn-danger mb-2">Delete Contact</a>
               </div>
