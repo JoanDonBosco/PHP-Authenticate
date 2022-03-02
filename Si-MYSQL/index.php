@@ -79,12 +79,11 @@
                 <h3 class="card-title text-capitalize"><?= $contact["name"] ?></h3>
                 <p class="m-2"><?= $contact["num_phone"] ?></p>
                 <a href="#" class="btn btn-secondary mb-2">Edit Contact</a>
-                <a href="#" class="btn btn-danger mb-2">Delete Contact</a>
+                <a href="delete.php?id=<?= $contact["id"]; ?>" class="btn btn-danger mb-2">Delete Contact</a>
               </div>
             </div>
           </div>
         <?php endforeach ?>
-      
       </div>
     </div>
   </main>
