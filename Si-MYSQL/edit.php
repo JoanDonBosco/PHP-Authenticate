@@ -32,7 +32,7 @@
       $name = $_POST["name"];
       $phoneNumber = $_POST["phone_number"];
 
-      $statement = $conn->prepare("UPDATE contacts SET name = :name, phone_number = :phone_number WHERE id = :id");
+      $statement = $conn->prepare("UPDATE contacts SET name = :name, num_phone = :phone_number WHERE id = :id");
       $statement->execute([
         ":id" => $id,
         ":name" => $_POST["name"],
@@ -42,7 +42,6 @@
       header("Location: index.php");
     }
   }
-
 
 
 ?>
@@ -127,7 +126,7 @@
                   <label for="phone_number" class="col-md-4 col-form-label text-md-end">Phone Number</label>
     
                   <div class="col-md-6">
-                    <input value="<?= $contact["num_phone"] ?>" id="phone_number" type="tel" class="form-control" name="num" autocomplete="phone_number" autofocus>
+                    <input value="<?= $contact["num_phone"] ?>" id="phone_number" type="tel" class="form-control" name="phone_number" autocomplete="phone_number" autofocus>
                   </div>
                 </div>
     
