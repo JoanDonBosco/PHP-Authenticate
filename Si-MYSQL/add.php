@@ -21,8 +21,8 @@
         $statement->bindParam(":num", $_POST["num"]);
         // Executem la syntaxis anteriorment preparada
         $statement->execute();
-        // Enviem al index.php
-        header("Location: index.php");
+        // Enviem al home.php
+        header("Location: home.php");
       }
   }
 ?>

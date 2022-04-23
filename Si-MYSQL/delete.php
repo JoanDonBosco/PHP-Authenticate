@@ -15,6 +15,6 @@ if ($statement->rowCount() == 0) {
 }
 // En el cas que si existeix el contacte preparem la QUERY i la executarem 
  $conn->prepare("DELETE FROM contacts WHERE id = :id")->execute([":id" => $id]);
-// Redirigim l'usuari a index.php
-header("Location: index.php");
+// Redirigim l'usuari a home.php
+header("Location: home.php");
 ?>
