@@ -1,6 +1,11 @@
 <?php
 // Importem el fitxer database.php i en conseqüencia les seves variables
 require "database.php";
+// En el cas que no exsiteix una sessió enviem al usuari al login.php
+if (!isset($_SESSION["user"])) {
+  header("Location: login.php");
+  return;
+}
 // A partir de la URL amb el metode GET recollim el valor pasat amb la variable $id
 $id = $_GET["id"];
 // Primer de tot fem una QUERY a la base de dades per comprobar si exixteix algun contatcte amb la id pasada

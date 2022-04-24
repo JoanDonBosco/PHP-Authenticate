@@ -1,6 +1,13 @@
 <?php 
   // Importem el fitxer database.php i en conseqüencia les seves variables
   require "database.php";
+  // Començem una sessió
+  session_start();
+  // En el cas que no exsiteix una sessió enviem al usuari al login.php
+  if (!isset($_SESSION["user"])) {
+    header("Location: login.php");
+    return;
+  }
   // Donem els valors de la query a la variable $contactes
   $contactes = $conn->query("SELECT * FROM contacts");
 ?>
