@@ -11,7 +11,7 @@ if (!isset($_SESSION["user"])) {
 // A partir de la URL amb el metode GET recollim el valor pasat amb la variable $id
 $id = $_GET["id"];
 // Primer de tot fem una QUERY a la base de dades per comprobar si exixteix algun contatcte amb la id pasada
-$statement = $conn->prepare("SELECT * FROM contacts WHERE id = :id");
+$statement = $conn->prepare("SELECT * FROM contacts WHERE id = :id LIMIT 1");
 // I executem la QUERY abre
 $statement->execute([":id" => $id]);
 // A partir de la QUERY feta anteriorment si el resultat de columnes es 0 no esxisteix retornem un 404
@@ -20,6 +20,15 @@ if ($statement->rowCount() == 0) {
   echo ("HTTP 404 NOT FOUND");
   return;
 }
+// Agafem les dades de la quey i les guardem a la vartiable contact
+$contact = $statement->fetch(PDO::FETCH_ASSOC);
+// Comprobem que el user_id correspont amb el del contacte en cas que no responem amb que no te permis
+if ($contact["user_id"] !== $_SESSION["user"]["id"]) {
+  http_response_code(403);
+  echo ("Forbbiden");
+  return;
+}
+
 // En el cas que si existeix el contacte preparem la QUERY i la executarem 
  $conn->prepare("DELETE FROM contacts WHERE id = :id")->execute([":id" => $id]);
 // Redirigim l'usuari a home.php

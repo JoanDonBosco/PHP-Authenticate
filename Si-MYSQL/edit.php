@@ -26,6 +26,14 @@
   }
   // En el cas que el contacte existeix pasem a la variable  $conrtact el resultat de la querry en format Array amb clau valor gracies a FETCH_ASSOC
   $contact = $statement->fetch(PDO::FETCH_ASSOC);
+
+  // Comprobem que el user_id correspont amb el del contacte en cas que no responem amb que no te permis
+  if ($contact["user_id"] !== $_SESSION["user"]["id"]) {
+    http_response_code(403);
+    echo ("Forbbiden");
+    return;
+  }
+
   $error = null;
 
   // <- UPDATE del contacte a la Base de Dades ->
