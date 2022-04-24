@@ -27,9 +27,12 @@
         $statement->bindParam(":name", $_POST["name"]);
         $statement->bindParam(":num", $_POST["num"]);
         // Executem la syntaxis anteriorment preparada
-        $statement->execute();
+        $statement->execute();  
+        // Crem una variable de sessió per mostra un missatge flash que es mostra una vegada.
+        $_SESSION["flash"] = ["message" => "Contact {$_POST["name"]} added."];
         // Enviem al home.php
         header("Location: home.php");
+        return;
       }
   }
 ?>

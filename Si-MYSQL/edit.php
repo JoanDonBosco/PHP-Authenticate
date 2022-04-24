@@ -53,8 +53,12 @@
         ":name" => $_POST["name"],
         ":phone_number" => $_POST["phone_number"],
       ]);
-    
+      
+      // Crem una variable de sessió per mostra un missatge flash que es mostra una vegada.
+      $_SESSION["flash"] = ["message" => "Contact {$_POST["name"]} updated."];
+
       header("Location: home.php");
+      return;
     }
   }
 

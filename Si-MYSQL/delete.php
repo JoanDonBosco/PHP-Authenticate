@@ -31,6 +31,8 @@ if ($contact["user_id"] !== $_SESSION["user"]["id"]) {
 
 // En el cas que si existeix el contacte preparem la QUERY i la executarem 
  $conn->prepare("DELETE FROM contacts WHERE id = :id")->execute([":id" => $id]);
-// Redirigim l'usuari a home.php
+// Crem una variable de sessió per mostra un missatge flash que es mostra una vegada.
+$_SESSION["flash"] = ["message" => "Contact {$contact["name"]} deleted."];
+ // Redirigim l'usuari a home.php
 header("Location: home.php");
 ?>
