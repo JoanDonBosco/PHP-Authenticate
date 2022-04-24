@@ -1,6 +1,8 @@
 <?php
   // Importem el fitxer database.php i en conseqüencia les seves variables
   require "database.php";
+  // Crem o afafem una sessio del usuari
+  session_start();
   // En el cas que no exsiteix una sessió enviem al usuari al login.php
   if (!isset($_SESSION["user"])) {
     header("Location: login.php");
@@ -20,7 +22,7 @@
         $nom = $_POST["name"];
         $num_phone = $_POST["num"];
         // Preparem una syntaxis SQL amb valors incognita per prevenir un SQL Inyection!
-        $statement = $conn->prepare("INSERT INTO contacts (name, num_phone) VALUES (:name, :num)");
+        $statement = $conn->prepare("INSERT INTO contacts (user_id,name, num_phone) VALUES ({$_SESSION["user"]["id"]},:name, :num)");
         // Comprobem que els valors pasats per POST no son un atac a la base de dades i canviem les variables :name i :num per les que ens pasen per el POST el usuari
         $statement->bindParam(":name", $_POST["name"]);
         $statement->bindParam(":num", $_POST["num"]);

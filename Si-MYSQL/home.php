@@ -9,7 +9,7 @@
     return;
   }
   // Donem els valors de la query a la variable $contactes
-  $contactes = $conn->query("SELECT * FROM contacts");
+  $contactes = $conn->query("SELECT * FROM contacts WHERE user_id = {$_SESSION["user"]["id"]}");
 ?>
 
 <!-- Header.php -->
