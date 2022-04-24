@@ -22,6 +22,13 @@
 
   <!-- Static Content -->
   <link rel="stylesheet" href="./static/css/index.css" />
+  
+  <!-- Trellem la uri a partir de variables del server  -->
+  <?php $uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);?>
+  <!-- Fem un if per nomes carregar el script a la págian de inici -->
+  <?php if ($uri == "/PHP-CRUD-LOGIN/Si-MYSQL/" || $uri == "/PHP-CRUD-LOGIN/Si-MYSQL/index.php"): ?>
+    <script defer src="./static/js/welcome.js"></script>
+  <?php endif ?>
 
   <title>Contacts App</title>
 </head>
