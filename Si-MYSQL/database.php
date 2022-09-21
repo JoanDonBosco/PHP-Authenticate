@@ -27,23 +27,4 @@
         die("PDO Connexió Error: " . $error->getMessage());
     }
     */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
